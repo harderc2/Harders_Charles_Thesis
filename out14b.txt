@@ -1,0 +1,26 @@
+clingo version 5.6.1
+Reading from domain_room.txt ...
+Solving...
+Answer: 1
+occurs(move(a0,r0,r3),0) occurs(move(a0,r3,r4),1) occurs(move(a0,r4,r7),2) occurs(move(a0,r7,r8),3) occurs(move(a0,r8,r5),9) occurs(lock(a0,d(r7,r8)),4) occurs(lock(a0,d(r7,r8)),5) occurs(lock(a0,d(r7,r8)),6) occurs(lock(a0,d(r7,r8)),7) occurs(lock(a0,d(r7,r8)),8) num_non_obl_compl(0) occurs(wait,10) wait_count(1) l(10) p_perm(0)
+Optimization: -1 0 -70
+Answer: 2
+occurs(move(a0,r0,r3),0) occurs(move(a0,r3,r4),1) occurs(move(a0,r4,r3),3) occurs(move(a0,r3,r6),5) occurs(move(a0,r6,r3),6) occurs(move(a0,r3,r4),7) occurs(move(a0,r4,r5),8) occurs(unlock(a0,d(r4,r5),masterkey),2) occurs(unlock(a0,d(r3,r6),k(r3,r6)),4) num_non_obl_compl(0) occurs(wait,9) occurs(wait,10) wait_count(2) l(9) p_perm(22)
+Optimization: -2 -22 -77
+Answer: 3
+occurs(move(a0,r0,r3),0) occurs(move(a0,r3,r4),1) occurs(move(a0,r4,r5),5) occurs(lock(a0,d(r4,r5)),2) occurs(lock(a0,d(r5,r4)),3) occurs(unlock(a0,d(r4,r5),masterkey),4) num_non_obl_compl(0) occurs(wait,6) occurs(wait,7) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(5) l(6) p_perm(16)
+Optimization: -5 -16 -100
+Answer: 4
+occurs(move(a0,r0,r1),1) occurs(move(a0,r1,r4),3) occurs(move(a0,r4,r5),5) occurs(unlock(a0,d(r0,r1),masterkey),0) occurs(unlock(a0,d(r1,r4),k(r1,r4)),2) occurs(unlock(a0,d(r4,r5),masterkey),4) num_non_obl_compl(0) occurs(wait,6) occurs(wait,7) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(5) l(6) p_perm(50)
+Optimization: -5 -50 -66
+Answer: 5
+occurs(move(a0,r0,r3),0) occurs(move(a0,r3,r4),1) occurs(move(a0,r4,r5),3) occurs(unlock(a0,d(r4,r5),masterkey),2) num_non_obl_compl(0) occurs(wait,4) occurs(wait,5) occurs(wait,6) occurs(wait,7) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(7) l(4) p_perm(25)
+Optimization: -7 -25 -100
+OPTIMUM FOUND
+
+Models       : 5
+  Optimum    : yes
+Optimization : -7 -25 -100
+Calls        : 1
+Time         : 5.383s (Solving: 0.02s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 5.375s

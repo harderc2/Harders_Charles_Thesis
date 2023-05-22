@@ -1,0 +1,32 @@
+clingo version 5.6.1
+Reading from domain_room.txt ...
+Solving...
+Answer: 1
+occurs(move(a0,r1,r2),9) occurs(lock(a0,d(r1,r4)),0) occurs(lock(a0,d(r1,r4)),1) occurs(lock(a0,d(r1,r4)),3) occurs(lock(a0,d(r1,r4)),4) occurs(lock(a0,d(r1,r4)),5) occurs(lock(a0,d(r1,r4)),6) occurs(lock(a0,d(r1,r4)),7) occurs(lock(a0,d(r1,r4)),8) occurs(unlock(a0,d(r1,r2),k(r1,r2)),2) occurs(wait,10) wait_count(1) l(10) p_perm(0)
+Optimization: -1
+Answer: 2
+occurs(move(a0,r1,r0),3) occurs(move(a0,r0,r1),4) occurs(move(a0,r1,r0),5) occurs(move(a0,r0,r1),6) occurs(move(a0,r1,r2),8) occurs(lock(a0,d(r2,r1)),0) occurs(lock(a0,d(r2,r1)),1) occurs(lock(a0,d(r1,r4)),7) occurs(unlock(a0,d(r1,r2),k(r1,r2)),2) occurs(wait,9) occurs(wait,10) wait_count(2) l(9) p_perm(0)
+Optimization: -2
+Answer: 3
+occurs(move(a0,r1,r2),7) occurs(lock(a0,d(r1,r0)),0) occurs(lock(a0,d(r2,r1)),1) occurs(lock(a0,d(r1,r4)),2) occurs(lock(a0,d(r1,r4)),4) occurs(lock(a0,d(r2,r1)),5) occurs(unlock(a0,d(r1,r2),k(r1,r2)),3) occurs(unlock(a0,d(r1,r2),k(r1,r2)),6) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(3) l(8) p_perm(0)
+Optimization: -3
+Answer: 4
+occurs(move(a0,r1,r0),2) occurs(move(a0,r0,r1),4) occurs(move(a0,r1,r2),6) occurs(lock(a0,d(r1,r2)),0) occurs(lock(a0,d(r0,r3)),3) occurs(lock(a0,d(r1,r4)),5) occurs(unlock(a0,d(r1,r2),k(r1,r2)),1) occurs(wait,7) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(4) l(7) p_perm(0)
+Optimization: -4
+Answer: 5
+occurs(move(a0,r1,r0),0) occurs(move(a0,r0,r1),1) occurs(move(a0,r1,r2),5) occurs(lock(a0,d(r1,r4)),2) occurs(lock(a0,d(r1,r4)),4) occurs(unlock(a0,d(r1,r2),k(r1,r2)),3) occurs(wait,6) occurs(wait,7) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(5) l(6) p_perm(0)
+Optimization: -5
+Answer: 6
+occurs(move(a0,r1,r0),2) occurs(move(a0,r0,r1),3) occurs(move(a0,r1,r2),4) occurs(lock(a0,d(r1,r4)),0) occurs(unlock(a0,d(r1,r2),k(r1,r2)),1) occurs(wait,5) occurs(wait,6) occurs(wait,7) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(6) l(5) p_perm(0)
+Optimization: -6
+Answer: 7
+occurs(move(a0,r1,r2),1) occurs(unlock(a0,d(r1,r2),k(r1,r2)),0) occurs(wait,2) occurs(wait,3) occurs(wait,4) occurs(wait,5) occurs(wait,6) occurs(wait,7) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(9) l(2) p_perm(0)
+Optimization: -9
+OPTIMUM FOUND
+
+Models       : 7
+  Optimum    : yes
+Optimization : -9
+Calls        : 1
+Time         : 5.107s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 5.094s

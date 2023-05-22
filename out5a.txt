@@ -1,0 +1,17 @@
+clingo version 5.6.1
+Reading from domain_room.txt ...
+Solving...
+Answer: 1
+num_non_obl_compl(0) occurs(move(a0,r1,r0),1) occurs(move(a0,r0,r3),2) occurs(move(a0,r3,r6),3) occurs(move(a0,r6,r7),4) occurs(move(a0,r7,r8),5) occurs(move(a0,r8,r5),6) occurs(move(a0,r5,r2),7) occurs(lock(a0,d(r4,r1)),0) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(3) l(8) p_perm(0)
+Optimization: 0 -112 -3
+Answer: 2
+num_non_obl_compl(0) occurs(move(a0,r1,r0),0) occurs(move(a0,r0,r3),1) occurs(move(a0,r3,r6),2) occurs(move(a0,r6,r7),3) occurs(move(a0,r7,r8),4) occurs(move(a0,r8,r5),5) occurs(move(a0,r5,r2),6) occurs(wait,7) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(4) l(7) p_perm(0)
+Optimization: 0 -114 -4
+OPTIMUM FOUND
+
+Models       : 2
+  Optimum    : yes
+Optimization : 0 -114 -4
+Calls        : 1
+Time         : 5.161s (Solving: 0.10s 1st Model: 0.00s Unsat: 0.09s)
+CPU Time     : 5.172s

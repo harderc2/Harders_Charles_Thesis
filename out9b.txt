@@ -1,0 +1,23 @@
+clingo version 5.6.1
+Reading from domain_room.txt ...
+Solving...
+Answer: 1
+occurs(move(a0,r3,r4),0) occurs(move(a0,r4,r5),1) occurs(move(a0,r5,r2),2) occurs(move(a0,r2,r5),3) occurs(move(a0,r5,r2),4) occurs(move(a0,r2,r5),5) occurs(move(a0,r5,r2),6) occurs(move(a0,r2,r5),7) occurs(move(a0,r5,r2),8) occurs(move(a0,r2,r1),9) num_non_obl_compl(0) occurs(wait,10) wait_count(1) l(10) p_perm(0)
+Optimization: -1 0 -60
+Answer: 2
+occurs(move(a0,r3,r4),0) occurs(move(a0,r4,r5),1) occurs(move(a0,r5,r2),2) occurs(move(a0,r2,r5),3) occurs(move(a0,r5,r2),4) occurs(move(a0,r2,r5),5) occurs(move(a0,r5,r2),8) occurs(move(a0,r2,r1),9) occurs(lock(a0,d(r8,r5)),6) occurs(lock(a0,d(r8,r5)),7) num_non_obl_compl(0) occurs(wait,10) wait_count(1) l(10) p_perm(0)
+Optimization: -1 0 -70
+Answer: 3
+occurs(move(a0,r3,r4),0) occurs(move(a0,r4,r5),1) occurs(move(a0,r5,r2),2) occurs(move(a0,r2,r5),3) occurs(move(a0,r5,r2),4) occurs(move(a0,r2,r5),5) occurs(move(a0,r5,r2),8) occurs(move(a0,r2,r1),9) occurs(lock(a0,d(r8,r5)),6) occurs(lock(a0,d(r4,r5)),7) num_non_obl_compl(0) occurs(wait,10) wait_count(1) l(10) p_perm(0)
+Optimization: -1 0 -80
+Answer: 4
+occurs(move(a0,r3,r0),1) occurs(move(a0,r0,r1),2) occurs(unlock(a0,d(r3,r0),masterkey),0) num_non_obl_compl(0) occurs(wait,3) occurs(wait,4) occurs(wait,5) occurs(wait,6) occurs(wait,7) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(8) l(3) p_perm(33)
+Optimization: -8 -33 -100
+OPTIMUM FOUND
+
+Models       : 4
+  Optimum    : yes
+Optimization : -8 -33 -100
+Calls        : 1
+Time         : 5.296s (Solving: 0.01s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 5.297s

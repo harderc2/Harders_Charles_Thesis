@@ -1,0 +1,14 @@
+clingo version 5.6.1
+Reading from domain_room.txt ...
+Solving...
+Answer: 1
+num_non_obl_compl(0) wait_count(11) l(0) occurs(wait,0) occurs(wait,1) occurs(wait,2) occurs(wait,3) occurs(wait,4) occurs(wait,5) occurs(wait,6) occurs(wait,7) occurs(wait,8) occurs(wait,9) occurs(wait,10)
+Optimization: 0 0 -11
+OPTIMUM FOUND
+
+Models       : 1
+  Optimum    : yes
+Optimization : 0 0 -11
+Calls        : 1
+Time         : 4.863s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 4.844s

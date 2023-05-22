@@ -1,0 +1,38 @@
+clingo version 5.6.1
+Reading from domain_room.txt ...
+Solving...
+Answer: 1
+occurs(move(a0,r0,r1),1) occurs(move(a0,r1,r4),9) occurs(lock(a0,d(r0,r3)),0) occurs(lock(a0,d(r1,r2)),2) occurs(lock(a0,d(r1,r2)),3) occurs(lock(a0,d(r1,r2)),4) occurs(lock(a0,d(r1,r2)),6) occurs(lock(a0,d(r1,r2)),7) occurs(lock(a0,d(r1,r2)),8) occurs(unlock(a0,d(r1,r4),k(r1,r4)),5) num_non_obl_compl(0) occurs(wait,10) wait_count(1) l(10) p_perm(30)
+Optimization: -30 -30 -1
+Answer: 2
+occurs(move(a0,r0,r1),1) occurs(move(a0,r1,r4),9) occurs(lock(a0,d(r0,r3)),0) occurs(lock(a0,d(r1,r2)),2) occurs(lock(a0,d(r1,r4)),3) occurs(lock(a0,d(r1,r4)),4) occurs(lock(a0,d(r1,r2)),6) occurs(lock(a0,d(r1,r2)),7) occurs(lock(a0,d(r1,r2)),8) occurs(unlock(a0,d(r1,r4),k(r1,r4)),5) num_non_obl_compl(0) occurs(wait,10) wait_count(1) l(10) p_perm(30)
+Optimization: -30 -40 -1
+Answer: 3
+occurs(move(a0,r0,r1),1) occurs(move(a0,r1,r4),9) occurs(lock(a0,d(r0,r3)),0) occurs(lock(a0,d(r1,r2)),2) occurs(lock(a0,d(r2,r1)),3) occurs(lock(a0,d(r1,r4)),4) occurs(lock(a0,d(r1,r2)),6) occurs(lock(a0,d(r1,r2)),7) occurs(lock(a0,d(r1,r2)),8) occurs(unlock(a0,d(r1,r4),k(r1,r4)),5) num_non_obl_compl(0) occurs(wait,10) wait_count(1) l(10) p_perm(30)
+Optimization: -30 -50 -1
+Answer: 4
+occurs(move(a0,r0,r1),1) occurs(move(a0,r1,r4),9) occurs(lock(a0,d(r3,r0)),0) occurs(lock(a0,d(r4,r1)),2) occurs(lock(a0,d(r1,r4)),3) occurs(lock(a0,d(r1,r4)),4) occurs(lock(a0,d(r1,r2)),6) occurs(lock(a0,d(r2,r1)),7) occurs(lock(a0,d(r1,r2)),8) occurs(unlock(a0,d(r1,r4),k(r1,r4)),5) num_non_obl_compl(0) occurs(wait,10) wait_count(1) l(10) p_perm(30)
+Optimization: -30 -60 -1
+Answer: 5
+occurs(move(a0,r0,r1),1) occurs(move(a0,r1,r4),9) occurs(lock(a0,d(r3,r0)),0) occurs(lock(a0,d(r0,r1)),2) occurs(lock(a0,d(r1,r4)),3) occurs(lock(a0,d(r4,r1)),4) occurs(lock(a0,d(r0,r1)),6) occurs(lock(a0,d(r1,r2)),7) occurs(lock(a0,d(r2,r1)),8) occurs(unlock(a0,d(r1,r4),k(r1,r4)),5) num_non_obl_compl(0) occurs(wait,10) wait_count(1) l(10) p_perm(30)
+Optimization: -30 -70 -1
+Answer: 6
+occurs(move(a0,r0,r1),1) occurs(move(a0,r1,r4),9) occurs(lock(a0,d(r0,r3)),0) occurs(lock(a0,d(r1,r4)),2) occurs(lock(a0,d(r1,r0)),3) occurs(lock(a0,d(r4,r1)),4) occurs(lock(a0,d(r2,r1)),5) occurs(lock(a0,d(r0,r1)),7) occurs(lock(a0,d(r1,r2)),8) occurs(unlock(a0,d(r1,r4),k(r1,r4)),6) num_non_obl_compl(0) occurs(wait,10) wait_count(1) l(10) p_perm(30)
+Optimization: -30 -80 -1
+Answer: 7
+occurs(move(a0,r0,r1),0) occurs(move(a0,r1,r4),8) occurs(lock(a0,d(r4,r1)),1) occurs(lock(a0,d(r4,r1)),2) occurs(lock(a0,d(r4,r1)),3) occurs(lock(a0,d(r4,r1)),4) occurs(lock(a0,d(r4,r1)),5) occurs(lock(a0,d(r4,r1)),6) occurs(unlock(a0,d(r1,r4),k(r1,r4)),7) num_non_obl_compl(0) occurs(wait,9) occurs(wait,10) wait_count(2) l(9) p_perm(33)
+Optimization: -33 -22 -2
+Answer: 8
+occurs(move(a0,r0,r1),0) occurs(move(a0,r1,r4),8) occurs(lock(a0,d(r4,r1)),1) occurs(lock(a0,d(r4,r1)),2) occurs(lock(a0,d(r4,r1)),3) occurs(lock(a0,d(r4,r1)),4) occurs(lock(a0,d(r2,r1)),5) occurs(lock(a0,d(r4,r1)),6) occurs(unlock(a0,d(r1,r4),k(r1,r4)),7) num_non_obl_compl(0) occurs(wait,9) occurs(wait,10) wait_count(2) l(9) p_perm(33)
+Optimization: -33 -33 -2
+Answer: 9
+occurs(move(a0,r0,r1),0) occurs(move(a0,r1,r4),2) occurs(unlock(a0,d(r1,r4),k(r1,r4)),1) num_non_obl_compl(0) occurs(wait,3) occurs(wait,4) occurs(wait,5) occurs(wait,6) occurs(wait,7) occurs(wait,8) occurs(wait,9) occurs(wait,10) wait_count(8) l(3) p_perm(100)
+Optimization: -100 -33 -8
+OPTIMUM FOUND
+
+Models       : 9
+  Optimum    : yes
+Optimization : -100 -33 -8
+Calls        : 1
+Time         : 5.116s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 5.125s

@@ -1,0 +1,20 @@
+holds(in(a0,r0),0). 
+
+holds(times_used(masterkey, 0), 0).
+direction(r1, r4).
+
+hasKey(a0, k(r1,r4)).
+%hasKey(a1, masterkey).
+
+
+holds(locked(d(r1,r4)),0).
+holds(locked(d(r0,r3)),0).
+holds(locked(d(r3,r4)),0).
+holds(locked(d(r4,r5)),0).
+holds(contaminated(r4),0).
+holds(has_fire(r2),0).
+holds(has_mask(a0),0).
+
+goal(I) :- holds(in(a0,r4), I).
+success :- goal(I), I <= n.
+:- not success.

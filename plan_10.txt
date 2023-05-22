@@ -1,0 +1,12 @@
+holds(in(a0,r5),0). 
+holds(times_used(masterkey, 0), 0).
+direction(r4, r5).
+direction(r5,r4).
+
+hasKey(a0, k(r4,r5)).
+
+holds(locked(d(r4,r5)),0).
+
+goal(I) :- holds(in(a0,r5), I).
+success :- goal(I), I <= n.
+:- not success.
