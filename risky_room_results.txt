@@ -1,0 +1,42 @@
+
+%INSERT INITIAL CONDITIONS ANDGOAL HERE 
+
+%%%
+
+%at least one and exactly one choice at each action.  left is lower bound right is upper bound
+% create a rule where one agent can only do one action at a time
+1 {occurs(A,I) : action(A)} 1:- step(I).% not goal(I).
+
+
+
+
+
+#show h/2.
+
+perm(A,I) :- permitted(A,I), occurs(A,I).
+w_perm(A,I) :- occurs(A,I), not permitted(A,I), not -permitted(A,I).
+
+c_perm(N) :- #count{A: perm(A,I)} = N.
+c_w_perm(N) :- #count{A: w_perm(A,I)} = N.
+wait_count(N) :- #count{I : occurs(wait, I)} = N.
+
+:- occurs(wait, I1), occurs(A, I2), I2 > I1, A != wait.
+:- occurs(A, I1), A != wait, goal(I), I1 >= I.
+l(N) :- wait_count(N1), N = n + 1 - N1.
+p_perm(N) :- c_perm(N1), l(N2), N = (N1 * 100) / N2.
+p_w_perm(N) :- c_w_perm(N1), l(N2), N = (N1 * 100) / N2.
+
+
+%%Case 3
+#maximize{ N@1 : wait_count(N) }.
+%%ignore non compliant actions
+%%
+
+
+#show occurs/2.
+#show l/1.
+#show p_perm/1.
+#show num_non_obl_compl/1.
+#show non_obl_compl/2.
+#show wait_count/1.
+

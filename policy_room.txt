@@ -1,0 +1,103 @@
+%Policy Encoding
+%Strict A: permitted(e) :- cond.
+%Strict O: obl(e) :- cond.
+%Defeas A: permitted(e) :- cond, not ab(d), not -permitted(e).
+%Defeas O: obl(e) :- cond, not ab(d), not -obl(e).
+
+exception(d1, I) :- holds(has_mask(A), I), agent(A), step(I).
+
+exception(d2, I) :- -hasKey(A, K), agent(A), step(I),
+                    key(K), room(R0), room(R1),
+                    K != k(R0, R1),
+                    K != k(R1, R0).
+exception(d3, I) :- holds(locked(d(R0,R1)), I),
+                    room(R0), room(R1), step(I).
+
+
+%Def Auth - permitted to unlock door either way if you have a key card
+%exception: used the masterkey too many times
+permitted(unlock(A,d(R0,R1),masterkey), I) :- room(R0), room(R1), agent(A), step(I),
+                                    hasKey(A, masterkey),
+                                    holds(times_used(masterkey, N), I),
+			not -permitted(unlock(A,d(R0,R1),masterkey), I),
+			not obl_not(unlock(A,d(R0,R1),masterkey), I),
+                                    N <= max_use.
+%Srict Auth - permitted to unlock door the right way if you have a key
+permitted(unlock(A,d(R0,R1),K), I) :- room(R0), room(R1), agent(A), step(I),
+			K = k(R0, R1),
+			hasKey(A,k(R0,R1)),
+			direction(R0,R1).
+%Strict Non-Auth - not permitted to use the masterkey more than N(3) times
+-permitted(unlock(A,d(R0,R1),masterkey), I) :- room(R0), room(R1), agent(A),
+                                    holds(times_used(masterkey, N), I),
+                                    N > max_use.
+
+%Strict Obl - obligated to use a key before using a badge if you have both
+obl_not(unlock(A,d(R0,R1),masterkey), I) :- step(I), room(R0), room(R1),
+                          hasKey(A, k(R0,R1)),
+                          hasKey(A, masterkey).
+
+
+%Strict obl_not - obl not to enter a room if there is a fire/
+obl_not(move(A,R0,R1), I) :- room(R0), agent(A),
+                         holds(has_fire(R1), I).
+
+%Defeas Non Auth to unlock a door from the wrong direction
+% exception: has badge (taken care of by earlier statements)
+%d0
+% defeasible permitted may be overridden by a strict obligation-not-to rule
+%permitted(action, I) :- not -permitted(action, I),
+%		holds(condition),
+%		 	not exception(D, I),
+%     not permitted(action),
+%			not obl(action).
+
+-permitted(unlock(A,d(R0,R1),K), I) :- room(R0), room(R1), agent(A), key(K), step(I),
+                         direction(R1,R0),
+			 holds(in(A,R0),I),
+			 K != masterkey,
+                         not permitted(unlock(A,d(R0,R1),K), I),
+                         not obl(unlock(A,d(R0,R1),K), I).
+
+
+
+%Defeas Auth to move to a room if you have a mask
+%d0
+% defeasible permitted may be overridden by a strict obligation-not-to rule
+%permitted(action, I) :- not -permitted(action, I),
+%		holds(condition),
+%		 	not exception(D, I),
+%			not obl_not(action).
+permitted(move(A,R0,R1), I) :- room(R0), room(R1), agent(A),
+                         holds(has_mask(A), I),
+                         not -permitted(move(A,R0,R1), I),
+                         not obl_not(move(A,R0,R1), I).
+%Defeas OBL Not to move to a room if it is contaminated
+%d1
+%prefer(d0, d1) - prefer an authorization policy over an obligation(-not-to) policy
+%obl_not(action, I) :- not -obl(action, I),  %defeasible?
+%		holds(condition),
+%		not exception(D, I),
+%		not -permitted(action),
+% 		not obl_not(action).
+%exception(d1, I) :- holds(has_mask(A), I), agent(A), step(I).
+obl_not(move(A,R0,R1), I) :- agent(A), room(R0),
+                        holds(contaminated(R1), I),
+                        not exception(d1, I),
+                        not -obl_not((move(A,R0,R1), I)),
+                        not obl(move(A,R0,R1), I).
+%Defeas Obl to lock the door if ther is a fire
+% exception: does not have a key, door is locked already
+% d2, d3
+%obl(action, I) :- not -obl(action, I),  %defeasible?
+%		holds(condition),
+%		not exception(D, I),
+%		not -permitted(action),
+% 		not obl_not(action).
+obl(lock(A,d(R0,R1)), I) :- agent(A), room(R0), room(R1), step(I),
+      			holds(has_fire(R1), I),
+			hasKey(A, k(R0,R1)),
+			not exception(d2, I),
+			not exception(d3, I),
+			not -permitted(lock(A,d(R0,R1)), I),
+			not obl_not((lock(A,d(R0,R1)), I)).

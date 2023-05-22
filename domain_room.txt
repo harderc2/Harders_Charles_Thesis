@@ -1,0 +1,182 @@
+#const n = 10.
+step(0..n).
+#const max_use = 2.
+next(I, I1) :- step(I), step(I1), I1 = I+1.
+%next(N, N1) :- step(N), step(N1), N1 = N+1.
+action(wait).
+%OBJECT DEFINITIONS
+%rooms
+room(r0).
+room(r1).
+room(r2).
+room(r3).
+room(r4).
+room(r5).
+room(r6).
+room(r7).
+room(r8).
+%agents
+agent(a0).
+%agent(a1).
+% d(x, y) – there is a door from room x to room y
+door(d(r0, r1)).
+door(d(r0, r3)).
+door(d(r1, r2)).
+door(d(r1, r4)).
+door(d(r2, r5)).
+door(d(r3, r4)).
+door(d(r3, r6)).
+door(d(r4, r5)).
+door(d(r4, r7)).
+door(d(r5, r8)).
+door(d(r6, r7)).
+door(d(r7, r8)).
+%direction(R0, R1) - the door has a direction from R0 to R1
+
+
+
+
+ % k(x, y) is the key for the door from room 1 ro 2
+key(k(R0, R1)) :- door(d(R0, R1)).
+key(masterkey).
+%FLUENTS
+fluent(inertial, in(A,R)) :- agent(A), room(R).
+fluent(inertial, locked(d(R0,R1))) :- room(R0), room(R1).
+fluent(inertial, contaminated(R)) :- room(R). 
+fluent(inertial, has_fire(R)) :- room(R). 
+fluent(inertial, has_mask(A)) :- agent(A). 
+
+fluent(inertial, times_used(masterkey, N)) :- step(N).
+% 
+holds(times_used(masterkey, N1), I1) :- occurs(unlock(A, d(X, Y), masterkey), I),
+                                        holds(times_used(masterkey, N), I),
+                                        next(N, N1),
+                                        next(I, I1).   
+%ACTIONS
+action(move(A,R0,R1)) :- agent(A), room(R0), room(R1),
+                    R0 != R1.
+
+
+% unlock(Agent, Door, Key)
+% Door can be specified as d(Room1, Room2)
+
+
+action(unlock(A,d(R0,R1),K)) :- agent(A), room(R0), room(R1), key(K),
+                    R0 != R1.
+action(lock(A,d(R0,R1))) :- agent(A), room(R0), room(R1),
+                    R0 != R1.
+%action(unlock(A, d(X,Y), masterkey)) :- agent(A), room(R0), room(R1),
+%                    R0 != R1.
+%AXIOMS
+
+
+holds(in(A,R1),I1) :- occurs(move(A,R0,R1),I),   
+                     I < n,
+                     next(I, I1).
+-holds(locked(d(R0,R1)), I1) :- occurs(unlock(A,d(R0,R1),K),I),
+                              I < n,
+                              next(I,I1).
+-holds(locked(d(R1,R0)), I1) :- occurs(unlock(A,d(R0,R1),K),I),
+                              I < n,
+                              next(I,I1).                            
+holds(locked(d(R0,R1)), I1) :- occurs(lock(A,d(R0,R1)),I),
+                              I < n,
+                              next(I,I1).
+holds(locked(d(R1,R0)), I1) :- occurs(lock(A,d(R0,R1)),I),
+                              I < n,
+                              next(I,I1).  
+holds(locked(d(R1,R0)), I) :- holds(locked(d(R0,R1), I)).
+-holds(locked(d(R1,R0)), I) :- -holds(locked(d(R0,R1), I)).
+holds(locked(d(R0,R1)), I) :- holds(locked(d(R1,R0), I)).
+-holds(locked(d(R0,R1)), I) :- -holds(locked(d(R1,R0), I)).
+
+
+-holds(times_used(masterkey, N1), I) :-  
+holds(times_used(masterkey, N), I),
+step(N1),
+N1 != N.
+                              
+-occurs(move(A,R0,R1), I) :- room(R1),
+                    -holds(in(A,R0),I).
+-occurs(move(A,R0,R1), I) :- agent(A), step(I),
+                    -door(d(R0, R1)).
+-occurs(move(A,R0,R1), I) :- agent(A), step(I),
+                    holds(locked(d(R0,R1)),I).
+                    %how to incorporate key feature into this setup?
+                    %through an action or can you incorporate more variables
+  
+-occurs(unlock(A,d(R0,R1),K), I) :- step(I), room(R0), room(R1),
+                              -hasKey(A, K).
+-occurs(unlock(A,d(R0,R1),K), I) :- step(I), agent(A),
+                              K != k(R0,R1),
+                              K != k(R1,R0),
+                              K != masterkey,
+                              room(R0),
+                              room(R1),
+                              key(K).
+-occurs(unlock(A,d(R0,R1),K), I) :- step(I), key(K),
+                              -holds(in(A,R0),I),
+                              -holds(in(A,R1),I).
+-occurs(unlock(A,d(R0,R1),K), I) :- step(I), key(K), room(R0),
+                              holds(in(A,R1),I).
+-occurs(unlock(A,d(R0,R1),K), I) :- agent(A), step(I), key(K),
+                              -door(d(R0, R1)).
+-occurs(unlock(A,d(R0,R1),masterkey), I) :- agent(A), room(R0), room(R1),
+                              holds(times_used(masterkey, N), I),
+                              N >= max_use.
+-occurs(unlock(A,d(R0,R1),K), I) :- agent(A), step(I), key(K),
+                              -holds(locked(d(R0,R1)),I).
+-occurs(lock(A,d(R0,R1)), I) :- step(I),
+                              -holds(in(A,R0),I),
+                              -holds(in(A,R1),I).      
+-occurs(lock(A,d(R0,R1)), I) :- agent(A), step(I),
+                              -door(d(R0, R1)). 
+-occurs(lock(A,d(R0,R1),K), I) :- agent(A), step(I), key(K),
+                              holds(locked(d(R0,R1)),I).                             
+-holds(in(A,R1),I) :- holds(in(A,R0),I),   
+                     room(R1),
+                     R0 != R1.
+
+
+%% GENERAL INERTIA AXIOMS FOR INERTIAL FLUENTS:
+
+
+holds(F,I1) :- fluent(inertial,F),
+               holds(F,I),                  
+               not -holds(F,I1),
+               I < n,
+               next(I, I1).
+
+
+-holds(F,I1) :- fluent(inertial,F),
+                        -holds(F,I),                
+                not holds(F,I1),
+                I < n,
+                next(I, I1).
+
+
+% defined fluents
+
+
+-holds(F, I) :- fluent(defined, F),
+                step(I),
+                not holds(F, I).
+
+
+door(d(R0,R1)) :- room(R0), room(R1),
+                    door(d(R1, R0)).
+-door(d(R0,R1)) :- room(R0), room(R1),
+                    not door(d(R0, R1)).
+holds(locked(d(R0,R1)),0) :- holds(locked(d(R1,R0)),0).
+-holds(locked(d(R0,R1))) :- room(R0), room(R1),
+                    not holds(locked(d(R0,R1)),0).
+                    
+-hasKey(A,K) :- agent(A), key(K),
+                    not hasKey(A, K).  
+-direction(R0,R1) :- room(R0), room(R1),
+                    not direction(R0,R1).
+-holds(in(A,R),0) :- agent(A), room(R),
+                     not holds(in(A,R),0). 
+-holds(F, 0) :- fluent(inertial, F),
+                not holds(F, 0).                     
+                     
